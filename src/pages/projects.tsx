@@ -43,9 +43,12 @@ const Projects = () => {
           className={`${visibleOne ? 'animate-leftin' : 'opacity-0'}`}
         >
           <CarouselWithInfo
-            title={project1native.title}
-            image={project1native.image}
-            description={project1native.description.eng}
+            title={project1.title}
+            image={project1.image}
+            description={              
+              (lang === 'SPA' && project1.description.spa) ||
+              project1.description.eng
+            }
           />
         </div>
       </div>
