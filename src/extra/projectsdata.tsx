@@ -1,4 +1,4 @@
-export const gmtrack = {
+export const project1 = {
   title: 'GM Track',
   image: [
     {
