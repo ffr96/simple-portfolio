@@ -12,7 +12,6 @@ import { Main } from '@/layout/Main';
 const Projects = () => {
   const [lang] = useContext(Contxt);
   const carouselOne = useRef(null);
-
   const options = {
     root: null,
     rootMargin: '0px',
@@ -39,6 +38,16 @@ const Projects = () => {
           />
         </div>
         <SimpleSeparator position="center" pulse />
+        <div
+          ref={carouselOne}
+          className={`${visibleOne ? 'animate-leftin' : 'opacity-0'}`}
+        >
+          <CarouselWithInfo
+            title={project1native.title}
+            image={project1native.image}
+            description={project1native.description.eng}
+          />
+        </div>
       </div>
     </Main>
   );
