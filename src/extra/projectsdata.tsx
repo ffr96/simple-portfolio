@@ -1,5 +1,3 @@
-import { ICarousel } from '@/components/CarouselWithInfo';
-
 export const gmtrack = {
   title: 'GM Track',
   image: [
