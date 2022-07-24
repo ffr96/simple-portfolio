@@ -1,12 +1,12 @@
 export const project1 = {
-  title: 'GM Track',
+  title: 'Project 1',
   image: [
     {
       link: '/assets/images/imagedark1.png',
       alt: 'first image',
     },
     {
-      link: '/assets/images/imagedark2.png',
+      link: '/assets/images/imagelight1.png',
       alt: 'second image',
     },
   ],
@@ -16,6 +16,6 @@ export const project1 = {
     spa:
       'App desarrolada para App desarrolada para App desarrolada para'
   },
-  gblink: 'https://github.com/ffr96',
+  gblink: 'https://github.com/ffr96/simple-portfolio',
   expandable: false,
 };

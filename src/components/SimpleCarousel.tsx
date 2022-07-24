@@ -14,7 +14,6 @@ export interface CarouselProps {
   }[];
   height: number;
   width: number;
-  expandable?: boolean;
 }
 type CarouselImage = {
   link: string;
@@ -32,19 +31,13 @@ type Direction = {
  * @argument3 Expandable: Boolean - defaults to true
  */
 
-const SimpleCarousel = ({
-  image,
-  height,
-  width,
-  expandable = true,
-}: CarouselProps) => {
+const SimpleCarousel = ({ image, height, width }: CarouselProps) => {
   const [currentImage, setCurrentImage] = useState<undefined | CarouselImage>(
     undefined
   );
   const [slideImage, setSlideImage] = useState<
     undefined | (CarouselImage & Direction)
   >(undefined);
-  const [modal, setModal] = useState(<div></div>);
   const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
@@ -105,35 +98,8 @@ const SimpleCarousel = ({
     }, timeoutTimer - 50);
   }, [imageIndex, image]);
 
-  const handleExpand = useCallback(() => {
-    setModal(
-      <div className="fixed top-0 left-0 z-20 h-screen w-screen bg-slate-700/40 dark:bg-orange-300/40">
-        <div className="absolute top-10 left-10 z-20 h-full w-full">
-          {currentImage && (
-            <div>
-              <Image
-                src={currentImage.link}
-                alt={currentImage.alt}
-                width={width}
-                height={height}
-                quality={100}
-              />
-              <div
-                className="absolute top-10 right-10 z-20 cursor-pointer select-none text-3xl text-orange-500 hover:text-orange-300"
-                onClick={() => setModal(<></>)}
-              >
-                X
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }, [currentImage, height, width]);
-
   return (
     <>
-      {expandable && modal}
       {currentImage && (
         <div className="relative h-full w-full select-none">
           {slideImage && (
@@ -158,7 +124,6 @@ const SimpleCarousel = ({
             width={width}
             height={height}
             quality={100}
-            onClick={handleExpand}
             className={`cursor-pointer`}
           />
           <div

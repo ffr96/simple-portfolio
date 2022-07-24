@@ -8,7 +8,6 @@ export interface ICarousel {
   }[];
   description?: string;
   title: string;
-  expandable?: boolean;
   gblink?: string;
 }
 
@@ -30,24 +29,13 @@ const width = 1920;
  * @returns JSX.Element
  */
 
-const CarouselWithInfo = ({
-  image,
-  description,
-  title,
-  expandable,
-  gblink,
-}: ICarousel) => {
+const CarouselWithInfo = ({ image, description, title, gblink }: ICarousel) => {
   return (
     <div>
       {image && (
         <>
           <h2 className="w-full text-center text-4xl font-bold">{title}</h2>
-          <SimpleCarousel
-            height={height}
-            width={width}
-            image={image}
-            expandable={expandable}
-          />
+          <SimpleCarousel height={height} width={width} image={image} />
           <div className="flex flex-col items-center justify-center py-6 font-sans text-lg font-normal">
             <p>{description}</p>
             <div>

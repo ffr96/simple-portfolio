@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
 import ContactForm from '@/components/ContactForm';
-import { useInput } from '@/components/useInput';
+import { useInput } from '@/hook/useInput';
 import { Main } from '@/layout/Main';
 
 const Contact = () => {
   const [name, handleName] = useInput();
   const [subject, handleSubject] = useInput();
   const [content, setContent] = useState('');
-  const [mailSuccess, setMailSuccess] = useState(false);
-  const [mailError, setMailError] = useState(false);
+  const [mailSent, setMailSent] = useState<'success' | 'failed' | undefined>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     /**
-     * Get token from reCAPTCHA and use it to check validity
+     * Get token from reCAPTCHA and use it to validate
      */
     window.grecaptcha.ready(() => {
       window.grecaptcha
@@ -29,14 +28,14 @@ const Contact = () => {
           };
           fetch('/api/sendMail', toSend).then((rsp) => {
             if (rsp.status === 200) {
-              setMailSuccess(true);
+              setMailSent('success');
               setTimeout(() => {
-                setMailSuccess(false);
+                setMailSent(undefined);
               }, 2500);
             } else {
-              setMailError(true);
+              setMailSent('failed');
               setTimeout(() => {
-                setMailError(false);
+                setMailSent(undefined);
               }, 5000);
             }
           });
@@ -64,10 +63,10 @@ const Contact = () => {
           data-callback="onSubmit"
           data-sitekey="6Lc9rRIhAAAAALLIGUU9m4hKEac0kMiSf4SpJl4z"
         ></div>
-        {mailSuccess && (
+        {mailSent === 'success' && (
           <h2 className="animate-rightin text-center text-2xl">Mail Sent!</h2>
         )}
-        {mailError && (
+        {mailSent === 'failed' && (
           <h2 className="animate-rightin text-center text-2xl">
             Error sending, try refreshing
           </h2>

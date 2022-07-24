@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+import { Contxt } from '@/ctx/provider';
 
 import { Button } from './Button';
 import Input from './Input';
@@ -13,6 +15,28 @@ type ContactFormProps = {
   subject: string;
 };
 
+const spaForm = {
+  title: (
+    <span>
+      Contacta<span className="font-sans">me</span>
+    </span>
+  ),
+  name: 'Nombre:',
+  subject: 'Titulo:',
+  content: 'Mensaje:',
+};
+
+const engForm = {
+  title: (
+    <span>
+      Contact <span className="font-sans">Me</span>
+    </span>
+  ),
+  name: 'Name:',
+  subject: 'Title:',
+  content: 'Content:',
+};
+
 const ContactForm = ({
   handleSubmit,
   content,
@@ -22,13 +46,16 @@ const ContactForm = ({
   subject,
   handleSubject,
 }: ContactFormProps) => {
+  const [lang] = useContext(Contxt);
   const [nameFocused, setNameFocused] = useState(false);
   const [subjectFocused, setSubjectFocused] = useState(false);
   const [contentFocused, setContentFocused] = useState(false);
+  const langToUse = lang === 'SPA' ? spaForm : engForm;
+
   return (
     <div>
       <h3 className="animate-[rightIn_1s_-0.2s_ease-out] pb-24 text-center text-5xl font-light first-letter:font-serif">
-        Contact <span className="font-sans">Me</span>
+        {langToUse.title}
       </h3>
 
       <div className="animate-[rightIn_1s_0.5s_backwards]">
@@ -44,7 +71,7 @@ const ContactForm = ({
                   nameFocused ? 'translate-x-[calc(100%-3rem)] font-bold' : ''
                 } transition-all`}
               >
-                Name:
+                {langToUse.name}
               </div>
               <Input value={name} required handleChange={handleName} />
             </div>
@@ -59,14 +86,14 @@ const ContactForm = ({
                     : ''
                 }`}
               >
-                Subject:
+                {langToUse.subject}
               </div>
               <Input value={subject} required handleChange={handleSubject} />
             </div>
           </div>
           <div className="w-full self-center text-center">
             <div className={`${contentFocused ? 'font-bold' : ''}`}>
-              Content:
+              {langToUse.content}
             </div>
             <textarea
               required
