@@ -23,12 +23,7 @@ const About = () => {
       <div>
         <div className="float-left pr-6 lg:pl-24">
           <AnimateIn>
-            <Image
-              height={'250%'}
-              width={'250%'}
-              alt="test"
-              src="/apple-touch-icon.png"
-            />
+            <Image height={'250%'} width={'250%'} alt="test" src="/beans.png" />
           </AnimateIn>
         </div>
         <h3 className="animate-leftin text-ellipsis text-6xl tracking-widest text-black dark:text-orange-500">

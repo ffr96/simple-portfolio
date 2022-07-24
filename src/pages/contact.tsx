@@ -1,14 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import ContactForm from '@/components/ContactForm';
+import { Contxt } from '@/ctx/provider';
 import { useInput } from '@/hook/useInput';
 import { Main } from '@/layout/Main';
 
+const spaMessage = {
+  success: 'Email Enviado!',
+  error: 'Error al enviar email, intentá recargando la pagina',
+};
+
+const engMessage = {
+  success: 'Mail Sent!',
+  error: 'Error sending mail, try refreshing',
+};
+
 const Contact = () => {
+  const [lang] = useContext(Contxt);
   const [name, handleName] = useInput();
   const [subject, handleSubject] = useInput();
   const [content, setContent] = useState('');
   const [mailSent, setMailSent] = useState<'success' | 'failed' | undefined>();
+
+  const langToUse = lang === 'SPA' ? spaMessage : engMessage;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,14 +78,17 @@ const Contact = () => {
           data-sitekey="6Lc9rRIhAAAAALLIGUU9m4hKEac0kMiSf4SpJl4z"
         ></div>
         {mailSent === 'success' && (
-          <h2 className="animate-rightin text-center text-2xl">Mail Sent!</h2>
+          <h2 className="animate-rightin text-center text-2xl">
+            {langToUse.success}
+          </h2>
         )}
         {mailSent === 'failed' && (
           <h2 className="animate-rightin text-center text-2xl">
-            Error sending, try refreshing
+            {langToUse.error}
           </h2>
         )}
         <ContactForm
+          lang={lang}
           name={name}
           subject={subject}
           content={content}

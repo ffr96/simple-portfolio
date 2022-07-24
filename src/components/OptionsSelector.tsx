@@ -8,18 +8,18 @@ import WheelLight from '@/public/assets/images/settingslight.png';
 
 import OptionsCard from './OptionsCard';
 
-const OptionSelector = () => {
+const OptionSelector = ({ lang }: { lang: string }) => {
   const [mouseenter, setMouseEnter] = useState(false);
   const [mouseleft, setMouseLeft] = useState(false);
   const [, dispatch] = useContext(Contxt);
 
-  const handleLang = (lang: string) => {
-    switch (lang) {
+  const handleLang = (language: string) => {
+    switch (language) {
       case 'SPA':
-        dispatch({ type: 'SET_LANGUAGE', value: lang });
+        dispatch({ type: 'SET_LANGUAGE', value: language });
         break;
       case 'ENG':
-        dispatch({ type: 'SET_LANGUAGE', value: lang });
+        dispatch({ type: 'SET_LANGUAGE', value: language });
         break;
       default:
     }
@@ -63,6 +63,7 @@ const OptionSelector = () => {
       </div>
       {mouseenter && (
         <OptionsCard
+          lang={lang}
           setMouseEnter={setMouseEnter}
           handleLang={handleLang}
           handleTheme={handleTheme}

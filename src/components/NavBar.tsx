@@ -61,7 +61,7 @@ const NavBar = ({ site }: NavProps) => {
           })}
       </div>
       <div className="flex items-center pr-10">
-        <OptionSelector />
+        <OptionSelector lang={lang} />
       </div>
     </div>
   );

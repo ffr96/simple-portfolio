@@ -1,6 +1,4 @@
-import React, { useContext, useState } from 'react';
-
-import { Contxt } from '@/ctx/provider';
+import React, { useState } from 'react';
 
 import { Button } from './Button';
 import Input from './Input';
@@ -13,6 +11,7 @@ type ContactFormProps = {
   content: string;
   name: string;
   subject: string;
+  lang: string;
 };
 
 const spaForm = {
@@ -38,6 +37,7 @@ const engForm = {
 };
 
 const ContactForm = ({
+  lang,
   handleSubmit,
   content,
   setContent,
@@ -46,7 +46,6 @@ const ContactForm = ({
   subject,
   handleSubject,
 }: ContactFormProps) => {
-  const [lang] = useContext(Contxt);
   const [nameFocused, setNameFocused] = useState(false);
   const [subjectFocused, setSubjectFocused] = useState(false);
   const [contentFocused, setContentFocused] = useState(false);
@@ -68,7 +67,7 @@ const ContactForm = ({
             >
               <div
                 className={`${
-                  nameFocused ? 'translate-x-[calc(100%-3rem)] font-bold' : ''
+                  nameFocused ? 'translate-x-[calc(100%-3em)] font-bold' : ''
                 } transition-all`}
               >
                 {langToUse.name}
@@ -82,7 +81,7 @@ const ContactForm = ({
               <div
                 className={`transition-all ${
                   subjectFocused
-                    ? 'translate-x-[calc(100%-55px)] font-bold'
+                    ? 'translate-x-[calc(100%-3rem)] font-bold'
                     : ''
                 }`}
               >

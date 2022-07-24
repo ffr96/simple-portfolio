@@ -6,6 +6,7 @@ import { NavBar } from '@/components/NavBar';
 import { simpleReducer } from '@/ctx/languageReducer';
 import { LangProvider } from '@/ctx/provider';
 import '../styles/global.css';
+import { Main } from '@/layout/Main';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     }
     setLoading(false);
   }, []);
-  if (loading) return <div>loading...</div>;
+
+  if (loading) return <Main>Loading...</Main>;
+
   return (
     <LangProvider reducer={simpleReducer}>
       <div>
